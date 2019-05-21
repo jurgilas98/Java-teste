@@ -17,8 +17,8 @@ public class ProducerDemoAsync {
 
 
         Properties props = new Properties();
-        props.put("bootstrap.servers","13.90.154.158:9092");
-        props.put("client.id","52.168.74.89:2181");
+        props.put("bootstrap.servers","52.224.181.51:9092");
+        props.put("client.id","13.90.205.181:2181");
         props.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
 
