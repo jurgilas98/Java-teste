@@ -1,6 +1,7 @@
 package Producer;
 
 import java.util.Properties;
+
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -10,40 +11,36 @@ import java.util.Map;
 public class ProducerDemo {
 
     public static void main(String[] args) {
+
+        String topicName = "jurgilastopic";
+        String key = "Key1";
+        String value = "Value";
+
         Properties props = new Properties();
-        props.put("bootstrap.servers","52.224.181.51:9092");
-        props.put("client.id","13.90.205.181:2181");
-        props.put("key.serializer","org.apache.kafka.common.serialization.ByteArraySerializer");
-        props.put("value.serializer","org.apache.kafka.common.serialization.ByteArraySerializer");
+        props.put("bootstrap.servers", "52.224.181.51:9092");
+        props.put("client.id", "13.90.205.181:2181");
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
 
         KafkaProducer kafkaProducer = new KafkaProducer(props);
 
-        int i =0 ;
 
-        kafkaProducer.send(new ProducerRecord("jurgilastopic1", (i + "").getBytes(), ("Registro"+i).getBytes()));
+        ProducerRecord<String, String> producerRecord = new ProducerRecord(topicName, key, value);
 
-
-
-        List partitionInfoList = kafkaProducer.partitionsFor("jurgilastopic1");
+        kafkaProducer.send(producerRecord);
 
 
-
+        List partitionInfoList = kafkaProducer.partitionsFor(topicName);
 
 
         Map metrics = kafkaProducer.metrics();
 
 
-
         kafkaProducer.close();
 
 
-
-
-
-
     }
-
 
 
 }
